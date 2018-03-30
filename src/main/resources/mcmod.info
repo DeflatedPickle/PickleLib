@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "picklelib",
+    "name": "PickleLib",
+    "description": "A simple library for my Minecraft Forge mods.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://github.com/DeflatedPickle/PickleLib",
+    "updateUrl": "",
+    "authorList": ["DeflatedPickle"],
+    "credits": "Forge, FML, DeflatedPickle",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
