@@ -1,9 +1,9 @@
-package com.deflatedpickle.picklelib.water;
+package com.deflatedpickle.explosivefishing.water;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -17,29 +17,48 @@ public class WaterBody {
         _startingPoint = startingPoint;
     }
 
+    public int getSimpleVolume() {
+        int width = getSimpleWidth();
+        int height = getSimpleHeight();
+        int length = getSimpleLength();
+
+        return (length * width) * height;
+    }
+
+    public int getSimpleWidth() {
+        int east = getSimpleDimension(EnumFacing.EAST);
+        int west = getSimpleDimension(EnumFacing.WEST);
+
+        return east + west - 1;
+    }
+
     public int getSimpleHeight() {
+        int up = getSimpleDimension(EnumFacing.UP);
+        int down = getSimpleDimension(EnumFacing.DOWN);
+
+        return up + down - 1;
+    }
+
+    public int getSimpleLength() {
+        int north = getSimpleDimension(EnumFacing.NORTH);
+        int south = getSimpleDimension(EnumFacing.SOUTH);
+
+        return north + south - 1;
+    }
+
+    private int getSimpleDimension(EnumFacing direction) {
         AtomicInteger height = new AtomicInteger();
 
         Block currentUpBlock = _world.getBlockState(_startingPoint).getBlock();
-        BlockPos referenceUpPoint = _startingPoint;
+        BlockPos referencePoint = _startingPoint;
 
         while (currentUpBlock == Blocks.WATER) {
-            referenceUpPoint = referenceUpPoint.up();
+            referencePoint = referencePoint.offset(direction);
 
-            currentUpBlock = _world.getBlockState(referenceUpPoint).getBlock();
+            currentUpBlock = _world.getBlockState(referencePoint).getBlock();
             height.getAndIncrement();
         }
 
-        Block currentDownBlock = _world.getBlockState(_startingPoint).getBlock();
-        BlockPos referenceDownPoint = _startingPoint;
-
-        while (currentDownBlock == Blocks.WATER) {
-            referenceDownPoint = referenceDownPoint.down();
-
-            currentDownBlock = _world.getBlockState(referenceDownPoint).getBlock();
-            height.getAndIncrement();
-        }
-
-        return height.get() - 1;
+        return height.get();
     }
 }
