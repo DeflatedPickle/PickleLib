@@ -7,7 +7,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.IntStream;
 
 public class WaterBody {
     private World _world;
@@ -21,23 +20,26 @@ public class WaterBody {
     public int getSimpleHeight() {
         AtomicInteger height = new AtomicInteger();
 
-        IntStream.range(0, 1).forEachOrdered(i -> {
-            Block currentBlock = _world.getBlockState(_startingPoint).getBlock();
-            BlockPos referencePoint = _startingPoint;
+        Block currentUpBlock = _world.getBlockState(_startingPoint).getBlock();
+        BlockPos referenceUpPoint = _startingPoint;
 
-            while (currentBlock == Blocks.WATER) {
-                if (i == 0) {
-                    referencePoint = referencePoint.up();
-                }
-                else if (i == 1) {
-                    referencePoint = referencePoint.down();
-                }
+        while (currentUpBlock == Blocks.WATER) {
+            referenceUpPoint = referenceUpPoint.up();
 
-                currentBlock = _world.getBlockState(referencePoint).getBlock();
-                height.getAndIncrement();
-            }
-        });
+            currentUpBlock = _world.getBlockState(referenceUpPoint).getBlock();
+            height.getAndIncrement();
+        }
 
-        return height.get();
+        Block currentDownBlock = _world.getBlockState(_startingPoint).getBlock();
+        BlockPos referenceDownPoint = _startingPoint;
+
+        while (currentDownBlock == Blocks.WATER) {
+            referenceDownPoint = referenceDownPoint.down();
+
+            currentDownBlock = _world.getBlockState(referenceDownPoint).getBlock();
+            height.getAndIncrement();
+        }
+
+        return height.get() - 1;
     }
 }
