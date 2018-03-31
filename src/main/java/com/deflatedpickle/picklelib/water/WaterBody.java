@@ -1,4 +1,4 @@
-package com.deflatedpickle.explosivefishing.water;
+package com.deflatedpickle.picklelib.water;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -22,7 +22,21 @@ public class WaterBody {
         int height = getSimpleHeight();
         int length = getSimpleLength();
 
-        return (length * width) * height;
+        return length * width * height;
+    }
+
+    public int getSimplePerimeter() {
+        int width = getSimpleWidth();
+        int length = getSimpleLength();
+
+        return (width * 2) + (length * 2);
+    }
+
+    public int getSimpleArea() {
+        int width = getSimpleWidth();
+        int length = getSimpleLength();
+
+        return length * width;
     }
 
     public int getSimpleWidth() {
