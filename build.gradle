@@ -11,13 +11,19 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 
 // Versions follow this format: MCVERSION-MAJORMOD.MAJORAPI.MINOR.PATCH.
-version = "1.12.2-1.0.0.0"
+version = "1.12.2-1.0.4.0"
 group = "com.deflatedpickle.picklelib"
 archivesBaseName = "picklelib"
 
 sourceCompatibility = targetCompatibility = '1.8'
 compileJava {
     sourceCompatibility = targetCompatibility = '1.8'
+}
+
+jar {
+    manifest {
+        attributes "FMLAT" : "picklelib_at.cfg"
+    }
 }
 
 minecraft {
