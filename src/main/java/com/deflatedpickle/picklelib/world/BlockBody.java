@@ -76,4 +76,19 @@ public class BlockBody {
 
         return height.get();
     }
+
+    public int getBlockCount(int accuracy, int limit, String searchType) {
+        int blocks = 0;
+
+        while (blocks < limit) {
+            if (searchType.equals("cubes")) {
+
+            }
+            else if (searchType.equals("conical ring")) {
+
+            }
+        }
+
+        return blocks;
+    }
 }
