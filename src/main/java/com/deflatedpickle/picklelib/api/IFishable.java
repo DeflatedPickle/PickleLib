@@ -1,5 +1,7 @@
 package com.deflatedpickle.picklelib.api;
 
 public interface IFishable {
-    boolean isFishable();
+    default boolean isFishable() {
+        return true;
+    }
 }
