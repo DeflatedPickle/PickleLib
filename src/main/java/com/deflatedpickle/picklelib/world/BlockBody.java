@@ -1,20 +1,21 @@
-package com.deflatedpickle.picklelib.water;
+package com.deflatedpickle.picklelib.world;
 
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class WaterBody {
+public class BlockBody {
     private World _world;
     private BlockPos _startingPoint;
+    private Block _blockType;
 
-    public WaterBody(World world, BlockPos startingPoint) {
+    public BlockBody(World world, BlockPos startingPoint, Block blockType) {
         _world = world;
         _startingPoint = startingPoint;
+        _blockType = blockType;
     }
 
     public int getSimpleVolume() {
@@ -66,7 +67,7 @@ public class WaterBody {
         Block currentUpBlock = _world.getBlockState(_startingPoint).getBlock();
         BlockPos referencePoint = _startingPoint;
 
-        while (currentUpBlock == Blocks.WATER) {
+        while (currentUpBlock == _blockType) {
             referencePoint = referencePoint.offset(direction);
 
             currentUpBlock = _world.getBlockState(referencePoint).getBlock();
