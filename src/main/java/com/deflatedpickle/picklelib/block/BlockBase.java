@@ -8,14 +8,14 @@ import vazkii.arl.block.BlockMod;
 public class BlockBase extends BlockMod {
     private String _nameSpace;
 
-    public BlockBase(String name, Material materialIn, Float hardness, Float resistance, Pair<String, Integer> harvestLevel, CreativeTabs tab, String nameSpace, String... variants) {
+    public BlockBase(String name, Material materialIn, Float hardness, Float resistance, Pair<String, Integer> harvestLevel, CreativeTabs creativeTab, String nameSpace, String... variants) {
         super(name, materialIn, variants);
         _nameSpace = nameSpace;
 
         setHardness(hardness);
         setResistance(resistance);
         setHarvestLevel(harvestLevel.getLeft(), harvestLevel.getRight());
-        setCreativeTab(tab);
+        setCreativeTab(creativeTab);
     }
 
     @Override
