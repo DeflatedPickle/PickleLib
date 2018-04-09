@@ -33,6 +33,18 @@ minecraft {
     mappings = "snapshot_20171003"
 }
 
+repositories {
+    jcenter()
+    maven {
+        name = "CurseForge"
+        url = "https://minecraft.curseforge.com/api/maven/"
+    }
+}
+
+dependencies {
+    deobfCompile "autoreglib:AutoRegLib:1.3:16"
+}
+
 processResources {
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
