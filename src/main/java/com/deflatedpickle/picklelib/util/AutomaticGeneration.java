@@ -1,5 +1,6 @@
 package com.deflatedpickle.picklelib.util;
 
+import com.deflatedpickle.picklelib.PickleLib;
 import com.deflatedpickle.picklelib.block.BlockBase;
 import com.deflatedpickle.picklelib.init.ModSmelting;
 import com.deflatedpickle.picklelib.item.ItemBase;
@@ -17,15 +18,15 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AutomaticGeneration {
-    public static List<Object> genMineralResources(String name, CreativeTabs creativeTab, String nameSpace, String group) {
+    public static List<Object> genMineralResources(String name, CreativeTabs creativeTab, String group) {
         // Generates; Ore, Ingot and a Nugget for the mineral.
-        BlockBase ore = new BlockBase(name + "_ore", Material.ROCK, 3.0f, 15.0f, ImmutablePair.of("pickaxe", 1), creativeTab, nameSpace);
-        ItemBase ingot = new ItemBase(name + "_ingot", 64, creativeTab, nameSpace);
-        ItemBase nugget = new ItemBase(name + "_nugget", 64, creativeTab, nameSpace);
+        BlockBase ore = new BlockBase(name + "_ore", Material.ROCK, 3.0f, 15.0f, ImmutablePair.of("pickaxe", 1), creativeTab);
+        ItemBase ingot = new ItemBase(name + "_ingot", 64, creativeTab);
+        ItemBase nugget = new ItemBase(name + "_nugget", 64, creativeTab);
 
-        GameRegistry.addShapelessRecipe(new ResourceLocation(nameSpace + ":" + name + "_ingot"), new ResourceLocation(group), new ItemStack(nugget, 9), Ingredient.fromStacks(new ItemStack(ingot)));
+        GameRegistry.addShapelessRecipe(new ResourceLocation(PickleLib.getNameSpace() + ":" + name + "_ingot"), new ResourceLocation(group), new ItemStack(nugget, 9), Ingredient.fromStacks(new ItemStack(ingot)));
         Ingredient stack = Ingredient.fromStacks(new ItemStack(nugget, 9));
-        GameRegistry.addShapelessRecipe(new ResourceLocation(nameSpace + ":" + name + "_nugget"), new ResourceLocation(group), new ItemStack(ingot), stack, stack, stack, stack, stack, stack, stack, stack, stack);
+        GameRegistry.addShapelessRecipe(new ResourceLocation(PickleLib.getNameSpace() + ":" + name + "_nugget"), new ResourceLocation(group), new ItemStack(ingot), stack, stack, stack, stack, stack, stack, stack, stack, stack);
         ModSmelting.blocksList.add(new ImmutablePair<>(ore, ingot));
 
         OreDictionary.registerOre("ore" + name.toUpperCase(), ore);
@@ -35,23 +36,23 @@ public class AutomaticGeneration {
         return Arrays.asList(ore, ingot, nugget);
     }
 
-    public static List<Object> genBeastResources(String name, CreativeTabs creativeTab, String nameSpace) {
+    public static List<Object> genBeastResources(String name, CreativeTabs creativeTab) {
         // Generates; Hide, Raw Meat and Cooked Meat for the beast.
-        ItemBase hide = new ItemBase(name + "_hide", 64, creativeTab, nameSpace);
-        ItemBase meatRaw = new ItemBase(name + "_meatRaw", 64, creativeTab, nameSpace);
-        ItemBase meatCooked = new ItemBase(name + "_meatCooked", 64, creativeTab, nameSpace);
+        ItemBase hide = new ItemBase(name + "_hide", 64, creativeTab);
+        ItemBase meatRaw = new ItemBase(name + "_meatRaw", 64, creativeTab);
+        ItemBase meatCooked = new ItemBase(name + "_meatCooked", 64, creativeTab);
 
         ModSmelting.itemList.add(new ImmutablePair<>(meatRaw, meatCooked));
 
         return Arrays.asList(hide, meatRaw, meatCooked);
     }
 
-    public static List<Object> genWoodResources(String name, CreativeTabs creativeTab, String nameSpace, String group) {
-        BlockBase log = new BlockBase(name + "_log", Material.WOOD, 2f, 10f, ImmutablePair.of("axe", 0), creativeTab, nameSpace);
-        BlockBase leaves = new BlockBase(name + "_leaves", Material.WOOD, 0.2f, 1f, ImmutablePair.of("shears", 0), creativeTab, nameSpace);
-        BlockBase planks = new BlockBase(name + "_planks", Material.WOOD, 2f, 15f, ImmutablePair.of("axe", 0), creativeTab, nameSpace);
+    public static List<Object> genWoodResources(String name, CreativeTabs creativeTab, String group) {
+        BlockBase log = new BlockBase(name + "_log", Material.WOOD, 2f, 10f, ImmutablePair.of("axe", 0), creativeTab);
+        BlockBase leaves = new BlockBase(name + "_leaves", Material.WOOD, 0.2f, 1f, ImmutablePair.of("shears", 0), creativeTab);
+        BlockBase planks = new BlockBase(name + "_planks", Material.WOOD, 2f, 15f, ImmutablePair.of("axe", 0), creativeTab);
 
-        GameRegistry.addShapelessRecipe(new ResourceLocation(nameSpace + ":" + name + "_ingot"), new ResourceLocation(group), new ItemStack(planks, 4), Ingredient.fromStacks(new ItemStack(log)));
+        GameRegistry.addShapelessRecipe(new ResourceLocation(PickleLib.getNameSpace() + ":" + name + "_ingot"), new ResourceLocation(group), new ItemStack(planks, 4), Ingredient.fromStacks(new ItemStack(log)));
 
         return Arrays.asList(log, leaves, planks);
     }

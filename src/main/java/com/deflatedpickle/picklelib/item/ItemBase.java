@@ -1,14 +1,12 @@
 package com.deflatedpickle.picklelib.item;
 
+import com.deflatedpickle.picklelib.PickleLib;
 import net.minecraft.creativetab.CreativeTabs;
 import vazkii.arl.item.ItemMod;
 
 public class ItemBase extends ItemMod {
-    private String _nameSpace;
-
-    public ItemBase(String name, Integer stackSize, CreativeTabs creativeTab, String nameSpace) {
+    public ItemBase(String name, Integer stackSize, CreativeTabs creativeTab) {
         super(name);
-        _nameSpace = nameSpace;
 
         setMaxStackSize(stackSize);
         setCreativeTab(creativeTab);
@@ -16,6 +14,6 @@ public class ItemBase extends ItemMod {
 
     @Override
     public String getModNamespace() {
-        return _nameSpace;
+        return PickleLib.getNameSpace();
     }
 }
