@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 public class PickleLib {
     @Instance
     public static PickleLib instance;
-    private static String _nameSpace;
+    private static String _nameSpace = Reference.MOD_ID;
 
     @EventHandler
     public void init(FMLInitializationEvent event) {

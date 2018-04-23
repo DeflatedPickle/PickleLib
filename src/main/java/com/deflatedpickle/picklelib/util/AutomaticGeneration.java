@@ -21,19 +21,36 @@ public class AutomaticGeneration {
     public static List<Object> genMineralResources(String name, CreativeTabs creativeTab) {
         // Generates; Ore, Ingot and a Nugget for the mineral.
         BlockBase ore = new BlockBase(name + "_ore", Material.ROCK, 3.0f, 15.0f, ImmutablePair.of("pickaxe", 1), creativeTab);
+        BlockBase block = new BlockBase(name + "_block", Material.IRON, 5.0f, 30.0f, ImmutablePair.of("pickaxe", 1), creativeTab);
         ItemBase ingot = new ItemBase(name + "_ingot", 64, creativeTab);
         ItemBase nugget = new ItemBase(name + "_nugget", 64, creativeTab);
 
-        GameRegistry.addShapelessRecipe(new ResourceLocation(PickleLib.getNameSpace() + ":" + name + "_ingot"), new ResourceLocation(PickleLib.getNameSpace()), new ItemStack(nugget, 9), Ingredient.fromStacks(new ItemStack(ingot)));
-        Ingredient stack = Ingredient.fromStacks(new ItemStack(nugget, 9));
-        GameRegistry.addShapelessRecipe(new ResourceLocation(PickleLib.getNameSpace() + ":" + name + "_nugget"), new ResourceLocation(PickleLib.getNameSpace()), new ItemStack(ingot), stack, stack, stack, stack, stack, stack, stack, stack, stack);
+        Ingredient stack;
+
+        // Craft the block into ingots
+        GameRegistry.addShapelessRecipe(new ResourceLocation(PickleLib.getNameSpace() + ":" + name + "_block_to_ingots"), new ResourceLocation(PickleLib.getNameSpace()), new ItemStack(ingot, 9), Ingredient.fromStacks(new ItemStack(block)));
+
+        // Craft the ingot into nuggets
+        GameRegistry.addShapelessRecipe(new ResourceLocation(PickleLib.getNameSpace() + ":" + name + "_ingot_to_nuggets"), new ResourceLocation(PickleLib.getNameSpace()), new ItemStack(nugget, 9), Ingredient.fromStacks(new ItemStack(ingot)));
+
+        // Craft the ingots into the block
+        stack = Ingredient.fromStacks(new ItemStack(ingot, 9));
+        GameRegistry.addShapelessRecipe(new ResourceLocation(PickleLib.getNameSpace() + ":" + name + "_ingots_to_block"), new ResourceLocation(PickleLib.getNameSpace()), new ItemStack(block), stack, stack, stack, stack, stack, stack, stack, stack, stack);
+
+        // Craft the nuggets into the ingot
+        stack = Ingredient.fromStacks(new ItemStack(nugget, 9));
+        GameRegistry.addShapelessRecipe(new ResourceLocation(PickleLib.getNameSpace() + ":" + name + "_nuggets_to_ingot"), new ResourceLocation(PickleLib.getNameSpace()), new ItemStack(ingot), stack, stack, stack, stack, stack, stack, stack, stack, stack);
+
+        // Smelt ore into the ingot
         ModSmelting.blocksList.add(new ImmutablePair<>(ore, ingot));
 
+        // Register to the ore dictionary
         OreDictionary.registerOre("ore" + name.toUpperCase(), ore);
+        OreDictionary.registerOre("block" + name.toUpperCase(), ore);
         OreDictionary.registerOre("ingot" + name.toUpperCase(), ingot);
         OreDictionary.registerOre("nugget" + name.toUpperCase(), nugget);
 
-        return Arrays.asList(ore, ingot, nugget);
+        return Arrays.asList(ore, block, ingot, nugget);
     }
 
     public static List<Object> genBeastResources(String name, CreativeTabs creativeTab) {
