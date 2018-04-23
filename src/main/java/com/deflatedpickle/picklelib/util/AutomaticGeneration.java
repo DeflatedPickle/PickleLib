@@ -2,6 +2,7 @@ package com.deflatedpickle.picklelib.util;
 
 import com.deflatedpickle.picklelib.PickleLib;
 import com.deflatedpickle.picklelib.block.BlockBase;
+import com.deflatedpickle.picklelib.init.ModCrafting;
 import com.deflatedpickle.picklelib.init.ModSmelting;
 import com.deflatedpickle.picklelib.item.ItemBase;
 import net.minecraft.block.Block;
@@ -25,21 +26,26 @@ public class AutomaticGeneration {
         ItemBase ingot = new ItemBase(name + "_ingot", 64, creativeTab);
         ItemBase nugget = new ItemBase(name + "_nugget", 64, creativeTab);
 
+        String resourceName = PickleLib.getNameSpace() + ":" + name;
         Ingredient stack;
 
         // Craft the block into ingots
-        GameRegistry.addShapelessRecipe(new ResourceLocation(PickleLib.getNameSpace() + ":" + name + "_block_to_ingots"), new ResourceLocation(PickleLib.getNameSpace()), new ItemStack(ingot, 9), Ingredient.fromStacks(new ItemStack(block)));
+        // GameRegistry.addShapelessRecipe(new ResourceLocation(resourceName + "_block_to_ingots"), new ResourceLocation(PickleLib.getNameSpace()), new ItemStack(ingot, 9), Ingredient.fromStacks(new ItemStack(block)));
+        ModCrafting.addRecipe(resourceName + "_block_to_ingots", new ItemStack(ingot, 9), Arrays.asList(Ingredient.fromStacks(new ItemStack(block))));
 
         // Craft the ingot into nuggets
-        GameRegistry.addShapelessRecipe(new ResourceLocation(PickleLib.getNameSpace() + ":" + name + "_ingot_to_nuggets"), new ResourceLocation(PickleLib.getNameSpace()), new ItemStack(nugget, 9), Ingredient.fromStacks(new ItemStack(ingot)));
+        // GameRegistry.addShapelessRecipe(new ResourceLocation(resourceName + "_ingot_to_nuggets"), new ResourceLocation(PickleLib.getNameSpace()), new ItemStack(nugget, 9), Ingredient.fromStacks(new ItemStack(ingot)));
+        ModCrafting.addRecipe(resourceName + "_block_to_ingots", new ItemStack(nugget, 9), Arrays.asList(Ingredient.fromStacks(new ItemStack(ingot))));
 
         // Craft the ingots into the block
         stack = Ingredient.fromStacks(new ItemStack(ingot, 9));
-        GameRegistry.addShapelessRecipe(new ResourceLocation(PickleLib.getNameSpace() + ":" + name + "_ingots_to_block"), new ResourceLocation(PickleLib.getNameSpace()), new ItemStack(block), stack, stack, stack, stack, stack, stack, stack, stack, stack);
+        // GameRegistry.addShapelessRecipe(new ResourceLocation(resourceName + "_ingots_to_block"), new ResourceLocation(PickleLib.getNameSpace()), new ItemStack(block), stack, stack, stack, stack, stack, stack, stack, stack, stack);
+        ModCrafting.addRecipe(resourceName + "_ingots_to_block", new ItemStack(block), Arrays.asList(stack, stack, stack, stack, stack, stack, stack, stack, stack));
 
         // Craft the nuggets into the ingot
         stack = Ingredient.fromStacks(new ItemStack(nugget, 9));
-        GameRegistry.addShapelessRecipe(new ResourceLocation(PickleLib.getNameSpace() + ":" + name + "_nuggets_to_ingot"), new ResourceLocation(PickleLib.getNameSpace()), new ItemStack(ingot), stack, stack, stack, stack, stack, stack, stack, stack, stack);
+        // GameRegistry.addShapelessRecipe(new ResourceLocation(resourceName + "_nuggets_to_ingot"), new ResourceLocation(PickleLib.getNameSpace()), new ItemStack(ingot), stack, stack, stack, stack, stack, stack, stack, stack, stack);
+        ModCrafting.addRecipe(resourceName + "_nuggets_to_ingot", new ItemStack(ingot), Arrays.asList(stack, stack, stack, stack, stack, stack, stack, stack, stack));
 
         // Smelt ore into the ingot
         ModSmelting.blocksList.add(new ImmutablePair<>(ore, ingot));
@@ -66,7 +72,7 @@ public class AutomaticGeneration {
 
     public static List<Object> genWoodResources(String name, CreativeTabs creativeTab) {
         BlockBase log = new BlockBase(name + "_log", Material.WOOD, 2f, 10f, ImmutablePair.of("axe", 0), creativeTab);
-        BlockBase leaves = new BlockBase(name + "_leaves", Material.WOOD, 0.2f, 1f, ImmutablePair.of("shears", 0), creativeTab);
+        BlockBase leaves = new BlockBase(name + "_leaves", Material.LEAVES, 0.2f, 1f, ImmutablePair.of("shears", 0), creativeTab);
         BlockBase planks = new BlockBase(name + "_planks", Material.WOOD, 2f, 15f, ImmutablePair.of("axe", 0), creativeTab);
 
         GameRegistry.addShapelessRecipe(new ResourceLocation(PickleLib.getNameSpace() + ":" + name + "_ingot"), new ResourceLocation(PickleLib.getNameSpace()), new ItemStack(planks, 4), Ingredient.fromStacks(new ItemStack(log)));
