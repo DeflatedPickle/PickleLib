@@ -1,15 +1,11 @@
 package com.deflatedpickle.picklelib.util;
 
-import com.deflatedpickle.picklelib.PickleLib;
 import com.deflatedpickle.picklelib.block.BlockBase;
 import com.deflatedpickle.picklelib.init.ModSmelting;
 import com.deflatedpickle.picklelib.item.ItemBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import vazkii.arl.recipe.RecipeHandler;
@@ -73,10 +69,12 @@ public class AutomaticGeneration {
         BlockBase leaves = new BlockBase(name + "_leaves", Material.LEAVES, 0.2f, 1f, ImmutablePair.of("shears", 0), creativeTab);
         BlockBase planks = new BlockBase(name + "_planks", Material.WOOD, 2f, 15f, ImmutablePair.of("axe", 0), creativeTab);
 
+        // genFurniture(name, planks, creativeTab)
+
         return Arrays.asList(log, leaves, planks);
     }
 
-/*    public static List<Object> genFurniture(String name, Block block, CreativeTabs creativeTab, String nameSpace) {
+/*    public static List<Object> genFurniture(String name, Block block, CreativeTabs creativeTab) {
         // Generates; Stairs, Slabs, Fence
 
         // return Arrays.asList(stairs, slabs, fence);
