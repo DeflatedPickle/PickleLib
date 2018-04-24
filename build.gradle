@@ -11,7 +11,7 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 
 // Versions follow this format: MCVERSION-MAJORMOD.MAJORAPI.MINOR.PATCH.
-version = "1.12.2-1.0.15.1"
+version = "1.12.2-1.0.15.2"
 group = "com.deflatedpickle.picklelib"
 archivesBaseName = "picklelib"
 
