@@ -1,6 +1,5 @@
 package com.deflatedpickle.picklelib;
 
-import com.deflatedpickle.picklelib.init.ModCrafting;
 import com.deflatedpickle.picklelib.init.ModSmelting;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -15,7 +14,6 @@ public class PickleLib {
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
-        ModCrafting.init();
         ModSmelting.init();
     }
 
