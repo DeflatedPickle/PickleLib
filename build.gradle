@@ -11,7 +11,7 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 
 // Versions follow this format: MCVERSION-MAJORMOD.MAJORAPI.MINOR.PATCH.
-version = "1.12.2-1.0.16.0"
+version = "1.12.2-1.0.17.0"
 group = "com.deflatedpickle.picklelib"
 archivesBaseName = "picklelib"
 
@@ -35,14 +35,10 @@ minecraft {
 
 repositories {
     jcenter()
-    maven {
-        name = "CurseForge"
-        url = "https://minecraft.curseforge.com/api/maven/"
-    }
+    maven { }
 }
 
 dependencies {
-    deobfCompile "autoreglib:AutoRegLib:1.3:16"
 }
 
 processResources {
